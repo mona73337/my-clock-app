@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A minimal EVM wallet NFT viewer grouped by blockchain and collection."
+    />
+    <title>NFT Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-label="Dashboard header">
+        <div class="brand-block">
+          <div class="brand-mark" aria-hidden="true">🍌</div>
+          <div>
+            <p class="eyebrow">Dashboard</p>
+            <h1>EVM NFT Viewer</h1>
+          </div>
+        </div>
+        <div class="status-pill" id="networkStatus">Idle</div>
+      </section>
+
+      <section class="control-grid" aria-label="Wallet scan form">
+        <form class="scan-form" id="scanForm">
+          <label class="field" for="walletAddress">
+            <span>Wallet address</span>
+            <input
+              id="walletAddress"
+              name="walletAddress"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="0x..."
+              required
+            />
+          </label>
+          <button class="primary-button" type="submit" id="scanButton">
+            Scan
+          </button>
+        </form>
+
+        <div class="visual-panel" aria-label="Collection summary">
+          <div class="radial-meter" id="radialMeter" aria-hidden="true">
+            <span>🍌</span>
+          </div>
+          <div class="visual-stats">
+            <p>Collectibles</p>
+            <strong id="nftCount">0</strong>
+            <small id="collectionCount">0 collections</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Portfolio summary">
+        <div class="metric">
+          <span>Collections</span>
+          <strong id="metricCollections">0</strong>
+        </div>
+        <div class="metric">
+          <span>NFT items</span>
+          <strong id="metricItems">0</strong>
+        </div>
+        <div class="metric">
+          <span>Blockchains</span>
+          <strong id="metricChains">0</strong>
+        </div>
+        <div class="metric">
+          <span>Contracts</span>
+          <strong id="metricContracts">0</strong>
+        </div>
+      </section>
+
+      <section class="results-section" aria-label="Scan results">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Holdings</p>
+            <h2>NFT collections</h2>
+          </div>
+          <div class="results-actions">
+            <label class="compact-search" for="resultSearch">
+              <span class="sr-only">Search collections or NFTs</span>
+              <input
+                id="resultSearch"
+                type="search"
+                placeholder="Search collections or NFTs"
+                autocomplete="off"
+              />
+            </label>
+            <button type="button" class="secondary-button small" id="exportJson">
+              JSON
+            </button>
+          </div>
+        </div>
+
+        <div class="progress-wrap" id="progressWrap" hidden>
+          <div class="banana-track">
+            <div class="banana-runner" id="progressBanana">🍌</div>
+          </div>
+          <p id="progressText">Preparing scan</p>
+        </div>
+
+        <div class="collection-groups" id="collectionGroups"></div>
+
+        <div class="empty-state" id="emptyState">
+          <div class="empty-mark" aria-hidden="true">🍌</div>
+          <p>No NFT wallet scanned yet.</p>
+        </div>
+      </section>
+
+      <section class="log-section" aria-label="Scan log">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Status</p>
+            <h2>Scan log</h2>
+          </div>
+          <button type="button" class="text-button" id="clearLog">Clear</button>
+        </div>
+        <div class="log-list" id="logList"></div>
+      </section>
+    </main>
+
+    <template id="collectionTemplate">
+      <article class="collection-card">
+        <div class="collection-heading">
+          <div class="collection-logo"></div>
+          <div class="collection-title">
+            <strong class="collection-name"></strong>
+            <span class="collection-meta"></span>
+          </div>
+          <a class="explorer-link" target="_blank" rel="noreferrer">View</a>
+        </div>
+        <div class="nft-grid"></div>
+      </article>
+    </template>
+
+    <template id="nftTemplate">
+      <div class="nft-card">
+        <div class="nft-media">
+          <img loading="lazy" alt="" />
+          <div class="nft-fallback">🍌</div>
+        </div>
+        <div class="nft-info">
+          <strong class="nft-name"></strong>
+          <span class="nft-token-id"></span>
+        </div>
+      </div>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
